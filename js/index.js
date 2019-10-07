@@ -87,6 +87,10 @@ async function findAdresses () {
   }
 }
 
+/**
+ * @function fetches detailed information about a particular address and builds the ui for a modal that displays the result.
+ * @param {String} id 
+ */
 async function getAddressInfo (id) {
   let url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id=${id}`;
 
@@ -114,6 +118,10 @@ async function getAddressInfo (id) {
   } catch (error) {
     alert(`An error occurred. ${error}`);
   } finally {
+    
+    /**
+     * @description use JQuery helper function for showing the modal.
+     */
     $("#addressModal").modal("show");
   }
 }
