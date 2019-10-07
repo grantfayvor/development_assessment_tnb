@@ -22,6 +22,7 @@ async function findAdresses () {
         `;
     }, "");
 
+    document.getElementById("table").hidden = false;
     document.getElementById("addresses").innerHTML = template;
 
   } catch (error) {
