@@ -37,6 +37,9 @@ async function findAdresses () {
     url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?fq=type:adres&q=${query}&start=${start}&rows=${rows}&fq=*:*`;
 
   try {
+    /**
+     * @description await a fetch request and return only the response property from the resulting json object
+     */
     let addresses = await fetch(url).then(res => res.json()).then(data => data.response);
 
     /**
@@ -58,6 +61,7 @@ async function findAdresses () {
             <td>${doc.weergavenaam}</td>
             <td>${doc.type}</td>
             <td>${doc.score}</td>
+            <td><button type="button" onclick="getAddressInfo('${doc.id}')" class="btn btn-default">View</button></td>
           </tr>
         `;
     }, "");
@@ -80,5 +84,36 @@ async function findAdresses () {
     if (start <= 0) {
       document.getElementById("previous").disabled = true;
     }
+  }
+}
+
+async function getAddressInfo (id) {
+  let url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id=${id}`;
+
+  try {
+    let details = await fetch(url).then(res => res.json()).then(data => data.response);
+
+    /**
+     * @description build a table out of the returned document
+     */
+    let template = Object.keys(details.docs[0]).reduce((acc, key) => {
+      return `
+        ${acc}
+        <div class="row col-sm-12 col-xs-12">
+          <div class="col-sm-5 col-xs-5">
+            ${key.toUpperCase()} :
+          </div>
+          <div class="col-sm-7 col-xs-7" style="overflow-wrap:break-word;">
+            ${details.docs[0][key]}
+          </div>
+        </div>
+      `;
+    }, "");
+
+    document.getElementById("modalBody").innerHTML = template;
+  } catch (error) {
+    alert(`An error occurred. ${error}`);
+  } finally {
+    $("#addressModal").modal("show");
   }
 }
