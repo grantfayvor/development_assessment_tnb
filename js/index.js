@@ -75,6 +75,15 @@ async function findAdresses () {
      * @description set the body of the table to be the reduced string template
      */
     document.getElementById("addresses").innerHTML = template;
+
+    /**
+     * @description used block-scoped variable addresses to determine if the next button should be disabled.
+     */
+    if (addresses.docs.length < 5) {
+      document.getElementById("next").disabled = true;
+    } else {
+      document.getElementById("next").disabled = false;
+    }
   } catch (error) {
     alert(`An error occurred. ${error}`);
   } finally {
@@ -118,7 +127,7 @@ async function getAddressInfo (id) {
   } catch (error) {
     alert(`An error occurred. ${error}`);
   } finally {
-    
+
     /**
      * @description use JQuery helper function for showing the modal.
      */
