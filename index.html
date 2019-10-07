@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="js/ejs.min.js"></script>
-  <title>Assignment</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>Development Assessment</title>
 </head>
+
 <body>
-  
-  <input type="text" name="query" id="query">
-  
+
+  <div class="container">
+    <div class="row">
+      <h3>Find Address</h3>
+    </div>
+    <div class="row">
+      <form>
+        <div class="form-group">
+          <label for="query">Query</label>
+          <input type="text" class="form-control" placeholder="Query" name="query" id="query">
+        </div>
+        <button type="button" class="btn btn-default" onclick="findAdresses()">Find Adresses</button>
+      </form>
+    </div>
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <th>Id</th>
+          <th>Weergavenaam</th>
+          <th>Type</th>
+          <th>Score</th>
+        </thead>
+        <tbody id="addresses">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script>
+
 </body>
+
 </html>
