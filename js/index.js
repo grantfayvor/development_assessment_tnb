@@ -1,6 +1,20 @@
+let start = 0,
+  rows = 5;
+
+function previous () {
+  start -= 5;
+  findAdresses();
+}
+
+function next () {
+  start += 5;
+  findAdresses();
+  document.getElementById("previous").disabled = false;
+}
+
 async function findAdresses () {
   let query = document.getElementById("query").value,
-    url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?fq=type:adres&q=${query}&start=0&rows=20&fq=*:*`;
+    url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?fq=type:adres&q=${query}&start=${start}&rows=${rows}&fq=*:*`;
 
   try {
     let addresses = await fetch(url).then(res => res.json()).then(data => data.response);
@@ -24,8 +38,11 @@ async function findAdresses () {
 
     document.getElementById("table").hidden = false;
     document.getElementById("addresses").innerHTML = template;
-
   } catch (error) {
     alert(`An error occurred. ${error}`);
+  } finally {
+    if (start <= 0) {
+      document.getElementById("previous").disabled = true;
+    }
   }
 }
