@@ -7,7 +7,7 @@ Built with JavaScript, HTML and CSS
 
 ### Run the application by
 * cloning the application from the online repository (GitHub)
-* opening the index.html file in a web browser
+* open the index.html file in a web browser
 
 ## Dependencies
 * The application depends on bootstrap for its styling
